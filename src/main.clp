@@ -52,7 +52,7 @@
 )
 
 (defrule inputAHBcIgM
-    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHBcIgM ?AHBcIgM &:(eq ?AHBcIgM "")) (AHBs ?AHBs &:(eq ?AHBs negative)))
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHBcIgM ?AHBcIgM &:(eq ?AHBcIgM "")) (AHBs ?AHBs &:(eq ?AHBs negative)) (HBsAg ?hbsag &:(eq ?hbsag positive)))
     =>
     (printout t "IgM Anti-HBc is positive?" crlf)
     (bind ?AHBcIgM (read))
@@ -93,3 +93,51 @@
     (printout t "Chronic Infection" crlf)
     (modify ?x (Hasil chronicinfect))
 )
+
+
+; right tree
+(defrule inputAHBs-2
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHBs ?AHBs &:(eq ?AHBs "")) (HBsAg ?hbsag &:(eq ?hbsag negative)))
+    =>
+    (printout t "Anti-HBs is positive?" crlf)
+    (bind ?AHBs (read))
+    (modify ?x (AHBs ?AHBs))
+)
+
+(defrule inputAHBc-2
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHBs ?AHBs &:(neq ?AHBs "")) (AHBc ?AHBc &:(eq ?AHBc "")) (HBsAg ?hbsag &:(eq ?hbsag negative)))
+    =>
+    (printout t "Anti-HBc is positive?" crlf)
+    (bind ?AHBc (read))
+    (modify ?x (AHBc ?AHBc))
+)
+
+(defrule Cured
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag negative)) (AHBs ?AHBs &:(eq ?AHBs positive)) (AHBc ?AHBc &:(eq ?AHBc positive)))
+    => 
+    (printout t "Cured" crlf)
+    (modify ?x (Hasil cured))
+)
+
+(defrule Vaccinated
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag negative)) (AHBs ?AHBs &:(eq ?AHBs positive)) (AHBc ?AHBc &:(eq ?AHBc negative)))
+    =>
+    (printout t "Vaccinated" crlf)
+    (modify ?x (Hasil vaccinated))
+)
+
+(defrule Unclear
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag negative)) (AHBs ?AHBs &:(eq ?AHBs negative)) (AHBc ?AHBc &:(eq ?AHBc positive)))
+    =>
+    (printout t "Unclear (possible resolved)" crlf)
+    (modify ?x (Hasil unclearresolved))
+)
+
+(defrule HealthynotVacOrSus
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag negative)) (AHBs ?AHBs &:(eq ?AHBs negative)) (AHBc ?AHBc &:(eq ?AHBc negative)))
+    =>
+    (printout t "Healthy not vaccinated or suspicious" crlf)
+    (modify ?x (Hasil healthynotvacorsus))
+)
+
+
