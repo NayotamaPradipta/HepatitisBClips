@@ -62,36 +62,31 @@
 (defrule Uncertain-1
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHDV ?AHDV &:(eq ?AHDV negative)) (HBsAg ?hbsag &:(eq ?hbsag positive)) (AHBc ?AHBc &:(eq ?AHBc positive)) (AHBs ?AHBs &:(eq ?AHBs positive))) 
     =>
-    (printout t "Uncertain Configuration" crlf)
-    (modify ?x (Hasil "Uncertain"))
+    (modify ?x (Hasil "Uncertain Configuration"))
 )
 
 (defrule Uncertain-2
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag positive)) (AHDV ?AHDV &:(eq ?AHDV negative)) (AHBc ?AHBc &:(eq ?AHBc negative)))
     =>
-    (printout t "Uncertain Configuration" crlf)
-    (modify ?x (Hasil "Uncertain"))
+    (modify ?x (Hasil "Uncertain Configuration"))
 )
 
 (defrule Hepatitisbd
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag positive)) (AHDV ?AHDV &:(eq ?AHDV positive)))
     =>
-    (printout t "Hepatitis B + D" crlf)
-    (modify ?x (Hasil hepatitisbd))
+    (modify ?x (Hasil "Hepatitis B + D"))
 )
 
 (defrule Acuteinfect
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag positive)) (AHDV ?AHDV &:(eq ?AHDV negative)) (AHBc ?AHBc &:(eq ?AHBc positive)) (AHBs ?AHBs &:(eq ?AHBs negative)) (AHBcIgM ?AHBcIgM &:(eq ?AHBcIgM positive)))
     =>
-    (printout t "Acute Infection" crlf)
-    (modify ?x (Hasil acuteinfect))
+    (modify ?x (Hasil "Acute Infection"))
 )
 
 (defrule Chronicinfect
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag positive)) (AHDV ?AHDV &:(eq ?AHDV negative)) (AHBc ?AHBc &:(eq ?AHBc positive)) (AHBs ?AHBs &:(eq ?AHBs negative)) (AHBcIgM ?AHBcIgM &:(eq ?AHBcIgM negative)))
     =>
-    (printout t "Chronic Infection" crlf)
-    (modify ?x (Hasil chronicinfect))
+    (modify ?x (Hasil "Chronic Infection"))
 )
 
 
@@ -115,29 +110,29 @@
 (defrule Cured
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag negative)) (AHBs ?AHBs &:(eq ?AHBs positive)) (AHBc ?AHBc &:(eq ?AHBc positive)))
     => 
-    (printout t "Cured" crlf)
-    (modify ?x (Hasil cured))
+    (modify ?x (Hasil "Cured"))
 )
 
 (defrule Vaccinated
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag negative)) (AHBs ?AHBs &:(eq ?AHBs positive)) (AHBc ?AHBc &:(eq ?AHBc negative)))
     =>
-    (printout t "Vaccinated" crlf)
-    (modify ?x (Hasil vaccinated))
+    (modify ?x (Hasil "Vaccinated"))
 )
 
 (defrule Unclear
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag negative)) (AHBs ?AHBs &:(eq ?AHBs negative)) (AHBc ?AHBc &:(eq ?AHBc positive)))
     =>
-    (printout t "Unclear (possible resolved)" crlf)
-    (modify ?x (Hasil unclearresolved))
+    (modify ?x (Hasil "Unclear (possible resolved)"))
 )
 
 (defrule HealthynotVacOrSus
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag negative)) (AHBs ?AHBs &:(eq ?AHBs negative)) (AHBc ?AHBc &:(eq ?AHBc negative)))
     =>
-    (printout t "Healthy not vaccinated or suspicious" crlf)
-    (modify ?x (Hasil healthynotvacorsus))
+    (modify ?x (Hasil "Healthy not vaccinated or suspicious"))
 )
 
-
+(defrule printResult
+    ?x <- (userInput (Hasil ?h &:(neq ?h none)))
+    => 
+    (printout t "Hasil Prediksi = " ?h crlf)
+)
