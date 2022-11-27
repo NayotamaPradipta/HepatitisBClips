@@ -22,6 +22,10 @@
     =>
     (printout t "HBsAg is positive?" crlf)
     (bind ?HBsAg (read))
+    (while (and(neq ?HBsAg positive)(neq ?HBsAg negative)) 
+        (printout t "HBsAg is positive?" crlf)
+        (bind ?HBsAg (read))
+    )
     (modify ?x (HBsAg ?HBsAg))
 )
 
@@ -32,6 +36,10 @@
     =>
     (printout t "Anti-HDV is positive?" crlf)
     (bind ?AHDV (read))
+    (while (and(neq ?AHDV positive)(neq ?AHDV negative)) 
+        (printout t "Anti-HDV is positive?" crlf)
+        (bind ?AHDV (read))
+    )    
     (modify ?x (AHDV ?AHDV))
 )
 
@@ -40,6 +48,10 @@
     =>
     (printout t "Anti-HBc is positive?" crlf)
     (bind ?AHBc (read))
+    (while (and(neq ?AHBc positive)(neq ?AHBc negative)) 
+        (printout t "Anti-HBc is positive?" crlf)
+        (bind ?AHBc (read))
+    )
     (modify ?x (AHBc ?AHBc))
 )
 
@@ -48,6 +60,10 @@
     =>
     (printout t "Anti-HBs is positive?" crlf)
     (bind ?AHBs (read))
+    (while (and(neq ?AHBs positive)(neq ?AHBs negative)) 
+        (printout t "Anti-HBs is positive?" crlf)
+        (bind ?AHBs (read))
+    )
     (modify ?x (AHBs ?AHBs))
 )
 
@@ -56,6 +72,10 @@
     =>
     (printout t "IgM Anti-HBc is positive?" crlf)
     (bind ?AHBcIgM (read))
+    (while (and(neq ?AHBcIgM positive)(neq ?AHBcIgM negative)) 
+        (printout t "IgM Anti-HBc is positive?" crlf)
+        (bind ?AHBcIgM (read))
+    )
     (modify ?x (AHBcIgM ?AHBcIgM))
 )
 
@@ -96,6 +116,10 @@
     =>
     (printout t "Anti-HBs is positive?" crlf)
     (bind ?AHBs (read))
+    (while (and(neq ?AHBs positive)(neq ?AHBs negative)) 
+        (printout t "Anti-HBs is positive?" crlf)
+        (bind ?AHBs (read))
+    )
     (modify ?x (AHBs ?AHBs))
 )
 
@@ -104,6 +128,10 @@
     =>
     (printout t "Anti-HBc is positive?" crlf)
     (bind ?AHBc (read))
+    (while (and(neq ?AHBc positive)(neq ?AHBc negative)) 
+        (printout t "Anti-HBc is positive?" crlf)
+        (bind ?AHBc (read))
+    )
     (modify ?x (AHBc ?AHBc))
 )
 
