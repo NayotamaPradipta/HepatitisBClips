@@ -79,6 +79,32 @@
     (modify ?x (AHBcIgM ?AHBcIgM))
 )
 
+; right tree
+(defrule inputAHBs-2
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHBs ?AHBs &:(eq ?AHBs "")) (HBsAg ?hbsag &:(eq ?hbsag negative)))
+    =>
+    (printout t "Anti-HBs is positive?" crlf)
+    (bind ?AHBs (read))
+    (while (and(neq ?AHBs positive)(neq ?AHBs negative)) 
+        (printout t "Anti-HBs is positive?" crlf)
+        (bind ?AHBs (read))
+    )
+    (modify ?x (AHBs ?AHBs))
+)
+
+(defrule inputAHBc-2
+    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHBs ?AHBs &:(neq ?AHBs "")) (AHBc ?AHBc &:(eq ?AHBc "")) (HBsAg ?hbsag &:(eq ?hbsag negative)))
+    =>
+    (printout t "Anti-HBc is positive?" crlf)
+    (bind ?AHBc (read))
+    (while (and(neq ?AHBc positive)(neq ?AHBc negative)) 
+        (printout t "Anti-HBc is positive?" crlf)
+        (bind ?AHBc (read))
+    )
+    (modify ?x (AHBc ?AHBc))
+)
+
+; Diagnosis
 (defrule Uncertain-1
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHDV ?AHDV &:(eq ?AHDV negative)) (HBsAg ?hbsag &:(eq ?hbsag positive)) (AHBc ?AHBc &:(eq ?AHBc positive)) (AHBs ?AHBs &:(eq ?AHBs positive))) 
     =>
@@ -107,32 +133,6 @@
     ?x <- (userInput (Hasil ?h &:(eq ?h none)) (HBsAg ?hbsag &:(eq ?hbsag positive)) (AHDV ?AHDV &:(eq ?AHDV negative)) (AHBc ?AHBc &:(eq ?AHBc positive)) (AHBs ?AHBs &:(eq ?AHBs negative)) (AHBcIgM ?AHBcIgM &:(eq ?AHBcIgM negative)))
     =>
     (modify ?x (Hasil "Chronic Infection"))
-)
-
-
-; right tree
-(defrule inputAHBs-2
-    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHBs ?AHBs &:(eq ?AHBs "")) (HBsAg ?hbsag &:(eq ?hbsag negative)))
-    =>
-    (printout t "Anti-HBs is positive?" crlf)
-    (bind ?AHBs (read))
-    (while (and(neq ?AHBs positive)(neq ?AHBs negative)) 
-        (printout t "Anti-HBs is positive?" crlf)
-        (bind ?AHBs (read))
-    )
-    (modify ?x (AHBs ?AHBs))
-)
-
-(defrule inputAHBc-2
-    ?x <- (userInput (Hasil ?h &:(eq ?h none)) (AHBs ?AHBs &:(neq ?AHBs "")) (AHBc ?AHBc &:(eq ?AHBc "")) (HBsAg ?hbsag &:(eq ?hbsag negative)))
-    =>
-    (printout t "Anti-HBc is positive?" crlf)
-    (bind ?AHBc (read))
-    (while (and(neq ?AHBc positive)(neq ?AHBc negative)) 
-        (printout t "Anti-HBc is positive?" crlf)
-        (bind ?AHBc (read))
-    )
-    (modify ?x (AHBc ?AHBc))
 )
 
 (defrule Cured
